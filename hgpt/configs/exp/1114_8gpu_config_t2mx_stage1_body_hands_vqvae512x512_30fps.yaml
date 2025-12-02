@@ -1,0 +1,125 @@
+SEED_VALUE: 1234 # Seed value
+DEBUG: True # Debug mode
+
+NAME: 1114_VQVAE_T2MX_t2m_meta_Body_Hands_512x512_30fps # Experiment names
+ACCELERATOR: 'gpu' # Devices optioncal: “cpu”, “gpu”, “tpu”, “ipu”, “hpu”, “mps, “auto”
+NUM_NODES: 1 # Number of GPU nodes for distributed training
+DEVICE: [0] # Index of gpus eg. [0] or [0,1,2,3] or [0,1,2,3,4,5,6,7]
+
+DATASET:
+  target: hGPT.data.MotionX.MotionXDataModule
+  NFEATS: 623
+  WORD_VERTILIZER_PATH: deps/glove_t2m/
+  MOTIONX:
+     target: hGPT.data.MotionX.MotionXDataModule
+  NFEATS: 623
+  WORD_VERTILIZER_PATH: deps/glove_t2m/
+  TASK_PATH: 'templates/template_pretrain_cot.json'
+  MOTIONX:
+    NAME: t2mx
+    NJOINTS: 52
+    DATA_ROOT: ""
+    SPLIT_PATH: ""
+    MOTION_FEAT_PATH: ""
+    SEMANTIC_TEXT_PATH: ""
+    COT_PATH: ""
+    MEAN_STD_PATH: ""
+    EVAL_MEAN_STD_PATH: ""
+    MIN_MOTION_LEN: 60
+    MAX_MOTION_LEN: 300
+    UNIT_LEN: 4
+    FRAME_RATE: 30.0
+    VAE_WIN_SIZE: 64
+    MOTION_TOKEN_PATH: ""
+    MAX_TEXT_LEN: 20
+    STD_TEXT: False
+
+
+model:
+  target: hGPT.models.hgpt.HumanoidGPT
+  params:
+    stage: ${TRAIN.STAGE}
+    task: 'vae'
+    lm: '' # ${lm.default}
+    motion_vae: ${vq.vqvae_512_512}
+    codebook_size: ${model.params.motion_vae.params.code_num}
+    condition: ''
+    metrics_dict: ${METRIC.TYPE}
+    debug: ${DEBUG}
+
+TRAIN:
+  #---------------------------------
+  STAGE: vae # stage "vae" , "lm_pretrain", "lm_instruct"
+  SPLIT: 'train' # Training split name
+  PRECISION: '32'
+  STRATEGY: 'auto'
+  #---------------------------------
+  BATCH_SIZE: 2048 # Size of batches, 256 before
+  ACCUMULATE_GRAD_BATCHES: 1
+  NUM_WORKERS: 16 # Number of workers
+  END_EPOCH: 3000 # End epoch
+  RESUME: '' # Resume training from this path
+  PRETRAINED: '' # Preatrained model path
+  PRETRAINED_VAE: ''
+
+  OPTIM:
+    target: AdamW
+    params:
+      lr: 2e-4
+      betas: [0.9, 0.99]
+      weight_decay: 0.0
+
+  LR_SCHEDULER:
+    target: CosineAnnealingLR
+    params:
+      T_max: ${eval:${LOGGER.VAL_EVERY_STEPS} * 100}
+      eta_min: 1e-6
+
+EVAL:
+  SPLIT: val # Validation split name
+  BATCH_SIZE: 2048 # Evaluating Batch size
+  NUM_WORKERS: 16 # Validation Batch size
+
+TEST:
+  DATASETS: ['MotionX']
+  # experiments/hgpt/VQVAE_MotionX_2Kx1K_2024-12-20-16-56-10/checkpoints/last.ckpt
+  CHECKPOINTS: "" # Pretrained model path
+  
+  SPLIT: 'test' # Testing split name
+  BATCH_SIZE: 2048 # Testing Batch size
+  NUM_WORKERS: 16 # Testing Batch size
+
+  SAVE_PREDICTIONS: True # Weather to save predictions
+  COUNT_TIME: True # Weather to count time during test
+  REPLICATION_TIMES: 1 # Number of times to replicate the test, 20 before
+  REP_I: 0 # For counting replication times
+
+LOSS:
+  LAMBDA_FEATURE: 1.0
+  LAMBDA_VELOCITY: 0.5
+  LAMBDA_COMMIT: 0.02
+  LAMBDA_CLS: 1.0
+  ABLATION:
+    RECONS_LOSS: 'l1_smooth'
+
+METRIC:
+  TYPE: ['MRMetrics']
+  FORCE_IN_METER: True
+  DIST_SYNC_ON_STEP: True
+  MM_NUM_SAMPLES: 100 # Number of samples for multimodal test
+  MM_NUM_REPEATS: 30 # Number of repeats for multimodal test
+  MM_NUM_TIMES: 10 # Number of times to repeat the multimodal test
+  DIVERSITY_TIMES: 300 # Number of times to repeat the diversity test
+
+LOGGER:
+  VAL_EVERY_STEPS: 100
+  TYPE: ['wandb']
+  WANDB:
+    target: pytorch_lightning.loggers.WandbLogger
+    params:
+      project: hgpt
+      offline: True
+      id: null
+      version: ''
+      name: ${NAME}
+      save_dir: ${FOLDER_EXP}

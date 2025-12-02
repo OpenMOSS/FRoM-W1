@@ -1,0 +1,13 @@
+{
+    "Text-to-Motion": {
+        "t2m": {
+            "class": "t2m",
+            "input": [
+                "<soi><Caption_Placeholder><eoi>"
+            ],
+            "output": [
+                "<soc><CoT_Placeholder><eoc>\n<Motion_Placeholder>"
+            ]
+        }
+    }
+}

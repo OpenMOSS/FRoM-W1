@@ -1,0 +1,12 @@
+CONFIG_FOLDER: configs # Config files path
+ARCHS_FOLDER: configs/archs # Module files path
+
+FOLDER: experiments # Experiment files saving path
+
+TEST:
+  FOLDER: results # Testing files saving path
+
+DEMO:
+  TASK: t2m
+  EXAMPLE: scripts/demos/t2m.txt
+  

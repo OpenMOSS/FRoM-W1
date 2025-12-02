@@ -1,0 +1,88 @@
+# TODO (pli): check the new evaluator.
+t2m_path: deps/t2m/
+# t2m_textencoder:
+#   target: hGPT.models.evaluator.TextEncoderBiGRUCo
+#   params:
+#     word_size: 300
+#     pos_size: 15
+#     hidden_size: 1024
+#     output_size: 1024
+# # t2m_moveencoder:
+# #   target: hGPT.models.evaluator.MovementConvEncoder
+# #   params:
+# #     input_size: 619
+# #     hidden_size: 1024
+# #     output_size: 1024
+# t2m_moveencoder:
+#   target: hGPT.models.evaluator.MovementEncoderVQ
+#   params:
+#     input_emb_width: 623
+#     output_emb_width: 1024
+#     down_t: 2
+#     stride_t: 2
+#     width: 1024
+#     depth: 3
+#     dilation_growth_rate: 3
+#     activation: relu
+# t2m_motionencoder:
+#   target: hGPT.models.evaluator.MotionEncoderBiGRUCo
+#   params:
+#     input_size: ${eval.tm2t.t2m_moveencoder.params.output_emb_width}
+#     hidden_size: 1024
+#     output_size: 1024
+
+
+
+# TODO (pli): check the new evaluator.
+# t2m_path: deps/t2m/
+t2m_textencoder:
+  target: hGPT.models.evaluator.TextEncoderBiGRUCo
+  params:
+    word_size: 300
+    pos_size: 15
+    # This part is for movement encoder trained from scratch
+    # hidden_size: 1024
+    # output_size: 1024
+    # This part is for movement encoder trained with the VQ encoder previously.
+    hidden_size: 512
+    output_size: 512
+  
+# yfgao This part is for movement encoder trained from scratch
+t2m_moveencoder:
+  target: hGPT.models.evaluator.MovementConvEncoder
+  params:
+    input_size: ${eval:${DATASET.NFEATS} - 4}
+    hidden_size: 512 # 1024
+    output_size: 512 # 1024
+# ends here
+
+# yfgao This part is for movement encoder trained with the VQ encoder previously.
+# t2m_moveencoder:
+#   target: hGPT.models.evaluator.MovementEncoderVQ
+#   params:
+#     input_emb_width: 623
+#     output_emb_width: 1024
+#     down_t: 2
+#     stride_t: 2
+#     width: 1024
+#     depth: 3
+#     dilation_growth_rate: 3
+#     activation: relu
+# ends here
+
+t2m_motionencoder:
+  target: hGPT.models.evaluator.MotionEncoderBiGRUCo
+  params:
+    # this part is for encoder trained with the VQ encoder previously.
+    # input_size: ${eval.tm2t.t2m_moveencoder.params.output_emb_width}
+    # output_size: 1024
+    # ends here
+
+    # this part is for the movement encoder trained from scratch
+    input_size: ${eval.tm2t.t2m_moveencoder.params.output_size}
+    hidden_size: 1024
+    output_size: 512
+    # ends here
+    # this line is for encoder trained with the VQ encoder previously.
+    
+    # this line is for the movement encoder trained from scratch

@@ -1,0 +1,18 @@
+target: hGPT.models.archs.hgpt_lm.MLM
+params:
+  model_type: llama
+  model_path: ./deps/Meta-Llama-3.1-8B # ./deps/Meta-Llama-3.1-8B-Instruct
+  stage: ${TRAIN.STAGE}
+  motion_codebook_size: ${model.params.codebook_size}
+  # ablation: ${ABLATION}
+  max_length: 512   # max_length: 512, 1500 before
+  lora: True   # lora: False
+  train_strategy: pt # train_strategy: sft
+  new_token_type: "insert"
+  framerate: 30.0
+  down_t: 4
+  predict_ratio: 0.2
+  inbetween_ratio: 0.25
+  quota_ratio: 0.0 # 0.5 before, 0.0 for now
+  # noise_density: 0.15
+  # mean_noise_span_length: 3

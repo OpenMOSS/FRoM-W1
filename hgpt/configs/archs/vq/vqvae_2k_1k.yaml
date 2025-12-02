@@ -1,0 +1,14 @@
+target: hGPT.models.archs.hgpt_vq.VQVae
+params:
+  quantizer: 'ema_reset'
+  code_num: 2048
+  code_dim: 1024
+  output_emb_width: 1024
+  width: 1024
+  down_t: 2
+  stride_t: 2
+  depth: 3
+  dilation_growth_rate: 3
+  norm: None
+  activation: 'relu'
+  nfeats: ${DATASET.NFEATS}
