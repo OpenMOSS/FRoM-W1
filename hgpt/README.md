@@ -8,7 +8,7 @@ conda activate hgpt
 ```
 
 ## Dependencies
-The dependencies abd their usage for H-GPT are listed below, please download and put them to `./deps` folder.
+The dependencies and their usage for H-GPT are listed below, please download and put them to `./deps` folder.
 
 | Model | Usage | Note |
 | :--- | :--- | :--- |
