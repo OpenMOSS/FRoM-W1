@@ -55,7 +55,7 @@ TRAIN:
   END_EPOCH: 300 # End epoch
   RESUME: '' # Resume training from this path
   PRETRAINED: '' # Preatrained model path
-  PRETRAINED_VAE: '' # checkpoints/MotionGPT-base/motiongpt_s3_h3d.tar # Vae model path
+  PRETRAINED_VAE: '' # Vae model path
 
   OPTIM:
     target: AdamW

@@ -82,7 +82,6 @@ EVAL:
 
 TEST:
   DATASETS: ['MotionX']
-  # experiments/hgpt/VQVAE_MotionX_2Kx1K_2024-12-20-16-56-10/checkpoints/last.ckpt
   CHECKPOINTS: "" # Pretrained model path
   
   SPLIT: 'test' # Testing split name
