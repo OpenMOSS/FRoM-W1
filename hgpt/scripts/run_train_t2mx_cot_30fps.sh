@@ -1,0 +1,1 @@
+torchrun --nnodes=1 --nproc-per-node=8 train.py --cfg_assets ./configs/assets.yaml --cfg configs/exp/1114_8gpu_config_t2mx_stage2_body_hands_llama_vqvae512x512_cotv3_30fps.yaml --task t2m --nodebug
