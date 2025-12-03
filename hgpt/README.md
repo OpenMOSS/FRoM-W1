@@ -100,9 +100,8 @@ to tokenize the motion data
 
 #### Training
 > [!IMPORTANT]  
-> Modify the properties `hgpt/configs/exp/1114_8gpu_config_t2mx_stage2_body_hands_llama_vqvae512x512_cotv3_30fps.yaml` and `hgpt/configs/exp/1114_8gpu_config_t2mx_stage2_body_hands_llama_vqvae512x512_nocot_30fps.yaml` to fit your own path as mentioned [here](#whole-body-motion-tokenizer).
-
-> Remember to set this property to your CoT data path to train w. CoT
+> 1. Modify the properties `hgpt/configs/exp/1114_8gpu_config_t2mx_stage2_body_hands_llama_vqvae512x512_cotv3_30fps.yaml` and `hgpt/configs/exp/1114_8gpu_config_t2mx_stage2_body_hands_llama_vqvae512x512_nocot_30fps.yaml` to fit your own path as mentioned [here](#whole-body-motion-tokenizer).
+> 2. Remember to set this property to your CoT data path to train w. CoT
 ```yaml
 DATASET:
   MOTIONX:
