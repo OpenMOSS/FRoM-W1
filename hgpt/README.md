@@ -54,13 +54,6 @@ DATASET:
     EVAL_MEAN_STD_PATH: "" # the root folder of the meta at evaluation stage
     MOTION_TOKEN_PATH: "" # the root folder to the tokenized motion (at tokenization stage)
 ```
-
-> [!NOTE]
-> You can also try other VQ settings by replacing 
-```yaml
-model:
-    motion_vae: ${vq.vqvae_512_512}
-```
 Run 
 
 ```bash
@@ -68,6 +61,12 @@ sh scripts/run_train_t2mx_vqvae_30fps.sh
 ```
 to train the Whole-Body Motion Tokenizer
 
+> [!NOTE]
+> You can also try other VQ settings by replacing 
+```yaml
+model:
+    motion_vae: ${vq.vqvae_512_512}
+```
 with one of `[vq.vq_1k_1k, vq.vq_1k_2k, vq.vq_2k_1k, vq.vq_2k_2k]`
 
 
@@ -84,7 +83,7 @@ TRAIN:
 ```
 
 > [!NOTE]
-> The tokenized motion will be saved at
+> The tokenized motion will be saved at:
 ```yaml
 DATASET:
   MOTIONX:
@@ -101,7 +100,8 @@ to tokenize the motion data
 
 #### Training
 > [!IMPORTANT]  
-> Modify the properties `hgpt/configs/exp/1114_8gpu_config_t2mx_stage2_body_hands_llama_vqvae512x512_cotv3_30fps.yaml` and `hgpt/configs/exp/1114_8gpu_config_t2mx_stage2_body_hands_llama_vqvae512x512_nocot_30fps.yaml` to fit your own path as mentioned [here](#whole-body-motion-tokenizer)
+> Modify the properties `hgpt/configs/exp/1114_8gpu_config_t2mx_stage2_body_hands_llama_vqvae512x512_cotv3_30fps.yaml` and `hgpt/configs/exp/1114_8gpu_config_t2mx_stage2_body_hands_llama_vqvae512x512_nocot_30fps.yaml` to fit your own path as mentioned [here](#whole-body-motion-tokenizer).
+
 > Remember to set this property to your CoT data path to train w. CoT
 ```yaml
 DATASET:
