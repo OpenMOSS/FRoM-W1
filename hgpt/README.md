@@ -109,6 +109,7 @@ DATASET:
 ```
 
 - Train w.o. CoT
+
 Run
 
 ```bash
@@ -116,6 +117,7 @@ sh scripts/run_train_t2mx_nocot_30fps.sh
 ```
 
 - Train w. CoT
+
 Run
 
 ```bash
@@ -133,6 +135,7 @@ TEST:
 ```
 
 - Evaluation w.o. CoT
+
 Run
 
 ```bash
@@ -140,6 +143,7 @@ sh scripts/run_test_t2mx_nocot_30fps.sh
 ```
 
 - Evaluation w. CoT
+
 Run
 
 ```bash
