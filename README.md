@@ -1,7 +1,7 @@
 # FRoM-W1 (机智-W1): Towards General Humanoid Whole-Body Control with Language Instructions
 
 <div style="text-align: center;">
-  The Humanoid Intelligence (Hi) Team at OpenMOSS Group
+  The Humanoid Intelligence (Hi) Team at FudanNLP and OpenMOSS Group
 </div>
 
 ## Introduction
