@@ -126,7 +126,9 @@ Refer to the official TWIST documentation:
 
 # Simulation & Real-World Deployment
 
-After training the desired policies, deployment can be carried out with our unified simulation & real-robot deployment framework **[RoboJuDo](https://github.com/GDDG08/RoboJuDo)**.
+After training the desired policies, deployment can be carried out with our modolar simulation & real-robot deployment framework **[RoboJuDo](https://github.com/GDDG08/RoboJuDo)**.
+
+We have an integrated version at [RoboJuDo](./RoboJuDo)
 
 **RoboJuDo** supports:
 

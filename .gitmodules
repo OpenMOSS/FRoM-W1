@@ -1,0 +1,3 @@
+[submodule "H-ACT/RoboJuDo"]
+	path = H-ACT/RoboJuDo
+	url = https://github.com/OpenMOSS/RoboJuDo
