@@ -32,7 +32,7 @@ Here is the current release progress:
 # Usage
 
 <div align="center">
-<img src="./assets/FRoM-W1-Overview.png" alt="overview" width="60%">
+<img src="./assets/FRoM-W1-Overview.png" alt="overview" width="80%">
 </div>
 
 The complete **FRoM-W1** workflow is illustrated above:
