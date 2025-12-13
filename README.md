@@ -5,16 +5,20 @@
 
   The Humanoid Intelligence (Hi) Team at FudanNLP and OpenMOSS Group
 </div>
+<div align="center">
+  <a href="https://huggingface.co/OpenMOSS-Team/FRoM-W1">🤗Huggingface</a>
+</div>
 
 ## Introduction
 <div align="center">
   <img src="./assets/FRoM-W1-Teaser.png" alt="FRoM-W1" width="50%">
 </div>
 
+
 Humanoid robots are capable of performing various actions such as greeting, dancing, and even backflipping. However, these motions are often hard-coded or specifically trained, which limits their versatility. 
 In this work, we present **FRoM-W1**, an open-source framework designed to achieve general humanoid whole-body motion control using natural language. 
 To universally understand natural language and generate corresponding motions, as well as enable various humanoid robots to stably execute these motions in the physical world under gravity, **FRoM-W1** operates in two stages: 
-(a) **H-GPT**: utilizing massive human data, a large-scale language-driven human whole-body motion generation model is trained to generate diverse natural behaviors.
+(a) **H-GPT**: Utilizing massive human data, a large-scale language-driven human whole-body motion generation model is trained to generate diverse natural behaviors.
 We further leverage the Chain-of-Thought technique to improve the model’s generalization in instruction understanding. 
 (b) **H-ACT**: After retargeting generated human whole-body motions into robot-specific actions, a motion controller that is pretrained and further fine-tuned through reinforcement learning in physical simulation enables humanoid robots to accurately and stably perform corresponding actions. 
 It is then deployed on real robots via a modular simulation-to-reality module. 
